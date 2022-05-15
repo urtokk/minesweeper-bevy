@@ -42,5 +42,33 @@ impl TileMap {
         }
         format!("{}{}", buffer, line)
     }
-    // TODO: https://dev.to/qongzi/bevy-minesweeper-part-2-1hi5
+
+    // Getter for 'width'
+    pub fn width(&self) -> u16 {
+        self.width
+    }
+
+    // Getter for 'height'
+    pub fn height(&self) -> u16 {
+        self.height
+    }
+
+    // Getter for 'bomb_count'
+    pub fn bomb_count(&self) -> u16 {
+        self.bomb_count
+    }
+}
+
+impl Deref for TileMap {
+    type Target = Vec<Vec<Tile>>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.map
+    }
+}
+
+impl DerefMut for TileMap {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.map
+    }
 }
