@@ -72,3 +72,5 @@ impl DerefMut for TileMap {
         &mut self.map
     }
 }
+
+// TODO: https://dev.to/qongzi/bevy-minesweeper-part-2-1hi5 -- Bombs and neighbors
