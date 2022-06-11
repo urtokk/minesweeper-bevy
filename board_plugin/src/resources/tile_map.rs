@@ -1,5 +1,20 @@
-use crate::resources::tile::Tile;
+use crate::{
+    resources::tile::Tile,
+    components::coordinates::Coordinates
+};
 use std::ops::{Deref, DerefMut};
+
+/// Delta coordinates for all 8 sqare directions
+const SQUARE_COORDINATES: [(i8, i8); 8] = [
+    (-1, -1),
+    (0, -1),
+    (1, -1),
+    (-1, 0),
+    (1, 0),
+    (-1, 1),
+    (0, 1),
+    (1, 1),
+];
 
 /// Base tile map
 #[derive(Debug, Default, Clone)]
@@ -57,6 +72,13 @@ impl TileMap {
     pub fn bomb_count(&self) -> u16 {
         self.bomb_count
     }
+
+    pub fn safe_sßuare_at(&self, coordinates: Coordinates) -> impl Iterator<Item = Coordinates> {
+        &SQUARE_COORDINATES
+            .iter()
+            .copied()
+            .map(move |tuple| coordinates + tuple)
+    }
 }
 
 impl Deref for TileMap {
@@ -73,4 +95,3 @@ impl DerefMut for TileMap {
     }
 }
 
-// TODO: https://dev.to/qongzi/bevy-minesweeper-part-2-1hi5 -- Bombs and neighbors
